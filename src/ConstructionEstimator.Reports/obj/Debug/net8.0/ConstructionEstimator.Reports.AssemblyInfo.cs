@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConstructionEstimator.Reports")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca20fa288431a86a3d388d85f0021cc0b09f84a9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38d65f9da48fd376ba84705b2c7e576a7899d774")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConstructionEstimator.Reports")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConstructionEstimator.Reports")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
