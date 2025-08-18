@@ -1,6 +1,7 @@
 using ConstructionEstimator.Core.Entities;
 using ConstructionEstimator.Core.Enums;
 using ConstructionEstimator.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace ConstructionEstimator.Infrastructure.Data;
 
@@ -8,9 +9,137 @@ public static class DataSeeder
 {
     public static async Task SeedAsync(ConstructionEstimatorDbContext context)
     {
+        await SeedProvincesAsync(context);
         await SeedMaterialsAsync(context);
         await SeedLaborsAsync(context);
+        await SeedSampleDataSourcesAsync(context);
         await context.SaveChangesAsync();
+    }
+
+    private static async Task SeedProvincesAsync(ConstructionEstimatorDbContext context)
+    {
+        if (context.Provinces.Any()) return;
+
+        var provinces = new List<Province>
+        {
+            // Miền Bắc
+            new Province { Name = "Hà Nội", Code = "HN", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hồ Chí Minh", Code = "HCM", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hải Phòng", Code = "HP", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Đà Nẵng", Code = "DN", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Cần Thơ", Code = "CT", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            
+            // Các tỉnh miền Bắc
+            new Province { Name = "Hà Giang", Code = "HG", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Cao Bằng", Code = "CB", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bắc Kạn", Code = "BK", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Tuyên Quang", Code = "TQ", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Lào Cai", Code = "LC", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Điện Biên", Code = "DB", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Lai Châu", Code = "LAI", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Sơn La", Code = "SL", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Yên Bái", Code = "YB", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hoà Bình", Code = "HB", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Thái Nguyên", Code = "TN", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Lạng Sơn", Code = "LS", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Quảng Ninh", Code = "QN", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bắc Giang", Code = "BG", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Phú Thọ", Code = "PT", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Vĩnh Phúc", Code = "VP", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bắc Ninh", Code = "BN", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hải Dương", Code = "HD", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hưng Yên", Code = "HY", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Thái Bình", Code = "TB", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hà Nam", Code = "HNA", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Nam Định", Code = "ND", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Ninh Bình", Code = "NB", Region = "Miền Bắc", IsActive = true, LastUpdated = DateTime.Now },
+            
+            // Các tỉnh miền Trung
+            new Province { Name = "Thanh Hóa", Code = "TH", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Nghệ An", Code = "NA", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hà Tĩnh", Code = "HT", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Quảng Bình", Code = "QB", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Quảng Trị", Code = "QT", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Thừa Thiên Huế", Code = "TTH", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Quảng Nam", Code = "QNA", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Quảng Ngãi", Code = "QNG", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bình Định", Code = "BD", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Phú Yên", Code = "PY", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Khánh Hòa", Code = "KH", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Ninh Thuận", Code = "NT", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bình Thuận", Code = "BT", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Kon Tum", Code = "KT", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Gia Lai", Code = "GL", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Đắk Lắk", Code = "DL", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Đắk Nông", Code = "DNO", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Lâm Đồng", Code = "LD", Region = "Miền Trung", IsActive = true, LastUpdated = DateTime.Now },
+            
+            // Các tỉnh miền Nam
+            new Province { Name = "Bình Phước", Code = "BP", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Tây Ninh", Code = "TNI", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bình Dương", Code = "BDU", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Đồng Nai", Code = "DNA", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bà Rịa - Vũng Tàu", Code = "BRVT", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Long An", Code = "LA", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Tiền Giang", Code = "TG", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bến Tre", Code = "BEN", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Trà Vinh", Code = "TV", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Vĩnh Long", Code = "VL", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Đồng Tháp", Code = "DTH", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "An Giang", Code = "AG", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Kiên Giang", Code = "KG", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Hậu Giang", Code = "HGI", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Sóc Trăng", Code = "ST", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Bạc Liêu", Code = "BL", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now },
+            new Province { Name = "Cà Mau", Code = "CM", Region = "Miền Nam", IsActive = true, LastUpdated = DateTime.Now }
+        };
+
+        await context.Provinces.AddRangeAsync(provinces);
+    }
+
+    private static async Task SeedSampleDataSourcesAsync(ConstructionEstimatorDbContext context)
+    {
+        if (context.DataSources.Any()) return;
+
+        var hanoi = await context.Provinces.FirstOrDefaultAsync(p => p.Code == "HN");
+        var hcm = await context.Provinces.FirstOrDefaultAsync(p => p.Code == "HCM");
+
+        if (hanoi != null && hcm != null)
+        {
+            var dataSources = new List<DataSource>
+            {
+                new DataSource
+                {
+                    ProvinceId = hanoi.Id,
+                    Name = "Sở Xây dựng Hà Nội",
+                    SourceType = "URL",
+                    SourceUrl = "https://soitd.hanoi.gov.vn/gia-vat-lieu-xay-dung",
+                    Description = "Bảng giá vật liệu xây dựng từ Sở Xây dựng Hà Nội",
+                    IsActive = true,
+                    UpdateFrequencyDays = 30,
+                    NextScanDate = DateTime.Now.AddDays(1),
+                    CreatedDate = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                    ScanConfiguration = "{\"MaterialCodeSelector\": \".material-code\", \"PriceSelector\": \".price\", \"SupplierSelector\": \".supplier\"}"
+                },
+                new DataSource
+                {
+                    ProvinceId = hcm.Id,
+                    Name = "Sở Xây dựng TP.HCM",
+                    SourceType = "URL",
+                    SourceUrl = "https://soxaydung.hochiminhcity.gov.vn/gia-vat-lieu",
+                    Description = "Bảng giá vật liệu xây dựng từ Sở Xây dựng TP.HCM",
+                    IsActive = true,
+                    UpdateFrequencyDays = 30,
+                    NextScanDate = DateTime.Now.AddDays(2),
+                    CreatedDate = DateTime.Now,
+                    LastUpdated = DateTime.Now,
+                    ScanConfiguration = "{\"MaterialCodeSelector\": \".mat-code\", \"PriceSelector\": \".unit-price\", \"SupplierSelector\": \".provider\"}"
+                }
+            };
+
+            await context.DataSources.AddRangeAsync(dataSources);
+        }
     }
 
     private static async Task SeedMaterialsAsync(ConstructionEstimatorDbContext context)
