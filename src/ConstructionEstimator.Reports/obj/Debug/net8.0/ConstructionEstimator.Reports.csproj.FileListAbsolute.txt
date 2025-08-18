@@ -1,0 +1,16 @@
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/bin/Debug/net8.0/ConstructionEstimator.Reports.deps.json
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/bin/Debug/net8.0/ConstructionEstimator.Reports.dll
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/bin/Debug/net8.0/ConstructionEstimator.Reports.pdb
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/bin/Debug/net8.0/ConstructionEstimator.Core.dll
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/bin/Debug/net8.0/ConstructionEstimator.Core.pdb
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.csproj.AssemblyReference.cache
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.GeneratedMSBuildEditorConfig.editorconfig
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.AssemblyInfoInputs.cache
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.AssemblyInfo.cs
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.csproj.CoreCompileInputs.cache
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.sourcelink.json
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.csproj.CopyComplete
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.dll
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/refint/ConstructionEstimator.Reports.dll
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ConstructionEstimator.Reports.pdb
+/home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Reports/obj/Debug/net8.0/ref/ConstructionEstimator.Reports.dll
