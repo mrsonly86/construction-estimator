@@ -4,6 +4,9 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <!-- WPF properties for Windows only -->
+    <UseWPF Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</UseWPF>
+    <TargetFramework Condition="$([MSBuild]::IsOSPlatform('Windows'))">net8.0-windows</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +17,8 @@
     <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <!-- LiveCharts only for Windows -->
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
   </ItemGroup>
 
   <ItemGroup>
