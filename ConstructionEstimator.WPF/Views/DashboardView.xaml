@@ -1,0 +1,151 @@
+<Window x:Class="ConstructionEstimator.WPF.Views.DashboardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Construction Estimator - Dashboard" Height="700" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <Border Grid.Row="0" Background="#2E86C1" Padding="15">
+            <StackPanel>
+                <TextBlock Text="CONSTRUCTION ESTIMATOR" 
+                           FontSize="28" FontWeight="Bold" 
+                           Foreground="White" HorizontalAlignment="Center"/>
+                <TextBlock Text="Hệ thống quản lý giá vật liệu xây dựng" 
+                           FontSize="14" Foreground="White" 
+                           HorizontalAlignment="Center" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
+        
+        <!-- Main Content -->
+        <TabControl Grid.Row="1" Margin="10">
+            <!-- Material Prices Tab -->
+            <TabItem Header="Bảng Giá Vật Liệu" FontSize="14">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <!-- Quick Actions -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10">
+                        <Button Content="Cập nhật tất cả" Margin="5" Padding="15,8"
+                                Command="{Binding RefreshAllCommand}"/>
+                        <ComboBox Width="150" Margin="5" 
+                                  ItemsSource="{Binding MaterialPriceViewModel.SupportedProvinces}"
+                                  SelectedItem="{Binding MaterialPriceViewModel.SelectedProvince}"/>
+                        <Button Content="Làm mới" Margin="5" Padding="15,8"
+                                Command="{Binding MaterialPriceViewModel.RefreshCommand}"/>
+                    </StackPanel>
+                    
+                    <!-- Material Prices Data Grid -->
+                    <DataGrid Grid.Row="1" 
+                              ItemsSource="{Binding MaterialPriceViewModel.MaterialPrices}"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              GridLinesVisibility="All">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Vật liệu" Binding="{Binding MaterialName}" Width="140"/>
+                            <DataGridTextColumn Header="Tỉnh/Thành" Binding="{Binding Province}" Width="100"/>
+                            <DataGridTextColumn Header="Giá" Binding="{Binding Price, StringFormat='{}{0:N0}'}" Width="100"/>
+                            <DataGridTextColumn Header="Đơn vị" Binding="{Binding Unit}" Width="70"/>
+                            <DataGridTextColumn Header="Cập nhật" Binding="{Binding LastUpdated, StringFormat='dd/MM HH:mm'}" Width="90"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            
+            <!-- Notifications Tab -->
+            <TabItem Header="Thông Báo" FontSize="14">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Row="0" Text="Thông báo hệ thống" FontSize="18" FontWeight="Bold" Margin="0,10"/>
+                    
+                    <ListBox Grid.Row="1" 
+                             ItemsSource="{Binding NotificationViewModel.Notifications}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="5">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding DisplayText}" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Category}" FontSize="10" Foreground="Gray"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </TabItem>
+            
+            <!-- Dashboard Summary Tab -->
+            <TabItem Header="Tổng Quan" FontSize="14">
+                <ScrollViewer>
+                    <StackPanel Margin="20">
+                        <TextBlock Text="Thống kê hệ thống" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+                        
+                        <!-- Summary Cards -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Total Materials Card -->
+                            <Border Grid.Column="0" Background="#E8F6F3" BorderBrush="#58D68D" 
+                                    BorderThickness="2" CornerRadius="5" Margin="5" Padding="15">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="Tổng vật liệu" FontSize="14" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding MaterialPriceViewModel.MaterialPrices.Count}" 
+                                               FontSize="32" FontWeight="Bold" 
+                                               HorizontalAlignment="Center" Foreground="#27AE60"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Provinces Card -->
+                            <Border Grid.Column="1" Background="#EBF5FB" BorderBrush="#5DADE2" 
+                                    BorderThickness="2" CornerRadius="5" Margin="5" Padding="15">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="Tỉnh/Thành" FontSize="14" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding MaterialPriceViewModel.SupportedProvinces.Count}" 
+                                               FontSize="32" FontWeight="Bold" 
+                                               HorizontalAlignment="Center" Foreground="#3498DB"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <!-- Notifications Card -->
+                            <Border Grid.Column="2" Background="#FDF2E9" BorderBrush="#F39C12" 
+                                    BorderThickness="2" CornerRadius="5" Margin="5" Padding="15">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="Thông báo" FontSize="14" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding NotificationViewModel.Notifications.Count}" 
+                                               FontSize="32" FontWeight="Bold" 
+                                               HorizontalAlignment="Center" Foreground="#E67E22"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                        
+                        <!-- Recent Activity -->
+                        <TextBlock Text="Hoạt động gần đây" FontSize="16" FontWeight="Bold" Margin="0,30,0,10"/>
+                        <ItemsControl ItemsSource="{Binding NotificationViewModel.Notifications}" MaxHeight="200">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="5">
+                                        <TextBlock Text="{Binding DisplayText}" TextWrapping="Wrap"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

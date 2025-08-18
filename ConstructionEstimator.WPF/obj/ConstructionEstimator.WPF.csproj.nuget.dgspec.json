@@ -1,0 +1,178 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.WPF/ConstructionEstimator.WPF.csproj": {}
+  },
+  "projects": {
+    "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/ConstructionEstimator.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/ConstructionEstimator.Core.csproj",
+        "projectName": "ConstructionEstimator.Core",
+        "projectPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/ConstructionEstimator.Core.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/runner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.118/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Infrastructure/ConstructionEstimator.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Infrastructure/ConstructionEstimator.Infrastructure.csproj",
+        "projectName": "ConstructionEstimator.Infrastructure",
+        "projectPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Infrastructure/ConstructionEstimator.Infrastructure.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/runner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/ConstructionEstimator.Core.csproj": {
+                "projectPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/ConstructionEstimator.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.118/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.WPF/ConstructionEstimator.WPF.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.WPF/ConstructionEstimator.WPF.csproj",
+        "projectName": "ConstructionEstimator.WPF",
+        "projectPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.WPF/ConstructionEstimator.WPF.csproj",
+        "packagesPath": "/home/runner/.nuget/packages/",
+        "outputPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.WPF/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/runner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/ConstructionEstimator.Core.csproj": {
+                "projectPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Core/ConstructionEstimator.Core.csproj"
+              },
+              "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Infrastructure/ConstructionEstimator.Infrastructure.csproj": {
+                "projectPath": "/home/runner/work/construction-estimator/construction-estimator/ConstructionEstimator.Infrastructure/ConstructionEstimator.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.118/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

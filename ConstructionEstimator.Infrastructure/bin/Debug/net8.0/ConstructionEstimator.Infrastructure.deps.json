@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ConstructionEstimator.Infrastructure/1.0.0": {
+        "dependencies": {
+          "ConstructionEstimator.Core": "1.0.0"
+        },
+        "runtime": {
+          "ConstructionEstimator.Infrastructure.dll": {}
+        }
+      },
+      "ConstructionEstimator.Core/1.0.0": {
+        "runtime": {
+          "ConstructionEstimator.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ConstructionEstimator.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ConstructionEstimator.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
