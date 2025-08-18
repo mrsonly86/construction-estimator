@@ -1,0 +1,450 @@
+2025-08-18 10:56:09.098 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-18 10:56:09.140 +00:00 [INF] Hosting environment: Production
+2025-08-18 10:56:09.142 +00:00 [INF] Content root path: /home/runner/work/construction-estimator/construction-estimator
+2025-08-18 10:56:10.639 +00:00 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2025-08-18 10:56:10.930 +00:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Categories" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Categories" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "Code" TEXT NOT NULL,
+    "Type" TEXT NOT NULL,
+    "ParentCategoryId" INTEGER NULL,
+    "SortOrder" INTEGER NOT NULL,
+    "Color" TEXT NULL,
+    "Icon" TEXT NULL,
+    "IsActive" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL,
+    CONSTRAINT "FK_Categories_Categories_ParentCategoryId" FOREIGN KEY ("ParentCategoryId") REFERENCES "Categories" ("Id")
+);
+2025-08-18 10:56:10.933 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Equipment" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Equipment" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "Code" TEXT NOT NULL,
+    "Type" TEXT NULL,
+    "Manufacturer" TEXT NULL,
+    "Model" TEXT NULL,
+    "HourlyRate" decimal(18,2) NOT NULL,
+    "DailyRate" decimal(18,2) NOT NULL,
+    "MonthlyRate" decimal(18,2) NOT NULL,
+    "FuelConsumption" decimal(18,2) NOT NULL,
+    "MaintenanceCostPerHour" decimal(18,2) NOT NULL,
+    "OperatorCostPerHour" decimal(18,2) NOT NULL,
+    "Capacity" decimal(8,2) NOT NULL,
+    "CapacityUnit" TEXT NULL,
+    "Power" decimal(8,2) NULL,
+    "PowerUnit" TEXT NULL,
+    "Weight" decimal(8,2) NULL,
+    "Specifications" TEXT NULL,
+    "Notes" TEXT NULL,
+    "IsActive" INTEGER NOT NULL,
+    "LastRateUpdate" TEXT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL
+);
+2025-08-18 10:56:10.933 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Labor" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Labor" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "Code" TEXT NOT NULL,
+    "Category" INTEGER NOT NULL,
+    "HourlyRate" decimal(18,2) NOT NULL,
+    "DailyRate" decimal(18,2) NOT NULL,
+    "MonthlyRate" decimal(18,2) NOT NULL,
+    "ProductivityFactor" decimal(5,2) NOT NULL,
+    "SkillRequirements" TEXT NULL,
+    "SafetyRequirements" TEXT NULL,
+    "Notes" TEXT NULL,
+    "IsActive" INTEGER NOT NULL,
+    "LastRateUpdate" TEXT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL
+);
+2025-08-18 10:56:10.934 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Materials" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Materials" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "Code" TEXT NOT NULL,
+    "Category" INTEGER NOT NULL,
+    "UnitOfMeasure" INTEGER NOT NULL,
+    "UnitPrice" decimal(18,2) NOT NULL,
+    "Supplier" TEXT NULL,
+    "Brand" TEXT NULL,
+    "Model" TEXT NULL,
+    "Specifications" TEXT NULL,
+    "Weight" decimal(8,4) NULL,
+    "Volume" decimal(8,4) NULL,
+    "Notes" TEXT NULL,
+    "IsActive" INTEGER NOT NULL,
+    "LastPriceUpdate" TEXT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL
+);
+2025-08-18 10:56:10.934 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "PriceLists" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_PriceLists" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "Type" INTEGER NOT NULL,
+    "Currency" TEXT NOT NULL,
+    "EffectiveDate" TEXT NOT NULL,
+    "ExpiryDate" TEXT NULL,
+    "Region" TEXT NULL,
+    "Supplier" TEXT NULL,
+    "Notes" TEXT NULL,
+    "IsActive" INTEGER NOT NULL,
+    "IsDefault" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL
+);
+2025-08-18 10:56:10.935 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Projects" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Projects" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "ClientName" TEXT NOT NULL,
+    "ClientAddress" TEXT NULL,
+    "ClientPhone" TEXT NULL,
+    "ClientEmail" TEXT NULL,
+    "Location" TEXT NOT NULL,
+    "StartDate" TEXT NOT NULL,
+    "EndDate" TEXT NULL,
+    "Status" INTEGER NOT NULL,
+    "Currency" TEXT NOT NULL,
+    "TotalCost" TEXT NOT NULL,
+    "LaborCost" TEXT NOT NULL,
+    "MaterialCost" TEXT NOT NULL,
+    "EquipmentCost" TEXT NOT NULL,
+    "OverheadCost" TEXT NOT NULL,
+    "ProfitAmount" TEXT NOT NULL,
+    "ProfitPercentage" TEXT NOT NULL,
+    "ContingencyPercentage" TEXT NOT NULL,
+    "Notes" TEXT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL
+);
+2025-08-18 10:56:10.935 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Standards" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Standards" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "Code" TEXT NOT NULL,
+    "Category" TEXT NOT NULL,
+    "SubCategory" TEXT NULL,
+    "ProductivityRate" decimal(18,4) NOT NULL,
+    "Unit" TEXT NOT NULL,
+    "MaterialQuantity" decimal(8,4) NULL,
+    "LaborHours" decimal(8,4) NULL,
+    "EquipmentHours" decimal(8,4) NULL,
+    "Formula" TEXT NULL,
+    "Conditions" TEXT NULL,
+    "Notes" TEXT NULL,
+    "Source" TEXT NULL,
+    "EffectiveDate" TEXT NULL,
+    "ExpiryDate" TEXT NULL,
+    "IsActive" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL
+);
+2025-08-18 10:56:10.936 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "PriceListItems" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_PriceListItems" PRIMARY KEY AUTOINCREMENT,
+    "PriceListId" INTEGER NOT NULL,
+    "MaterialId" INTEGER NULL,
+    "LaborId" INTEGER NULL,
+    "EquipmentId" INTEGER NULL,
+    "UnitPrice" decimal(18,2) NOT NULL,
+    "DiscountPercentage" decimal(5,2) NULL,
+    "MinimumQuantity" decimal(18,2) NULL,
+    "MaximumQuantity" decimal(18,2) NULL,
+    "EffectiveDate" TEXT NOT NULL,
+    "ExpiryDate" TEXT NULL,
+    "Notes" TEXT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL,
+    CONSTRAINT "FK_PriceListItems_Equipment_EquipmentId" FOREIGN KEY ("EquipmentId") REFERENCES "Equipment" ("Id"),
+    CONSTRAINT "FK_PriceListItems_Labor_LaborId" FOREIGN KEY ("LaborId") REFERENCES "Labor" ("Id"),
+    CONSTRAINT "FK_PriceListItems_Materials_MaterialId" FOREIGN KEY ("MaterialId") REFERENCES "Materials" ("Id"),
+    CONSTRAINT "FK_PriceListItems_PriceLists_PriceListId" FOREIGN KEY ("PriceListId") REFERENCES "PriceLists" ("Id") ON DELETE CASCADE
+);
+2025-08-18 10:56:10.936 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "EstimateItems" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_EstimateItems" PRIMARY KEY AUTOINCREMENT,
+    "ProjectId" INTEGER NOT NULL,
+    "Name" TEXT NOT NULL,
+    "Description" TEXT NULL,
+    "Code" TEXT NOT NULL,
+    "Type" INTEGER NOT NULL,
+    "UnitOfMeasure" INTEGER NOT NULL,
+    "Quantity" decimal(18,4) NOT NULL,
+    "UnitPrice" decimal(18,2) NOT NULL,
+    "TotalPrice" decimal(18,2) NOT NULL,
+    "MaterialId" INTEGER NULL,
+    "LaborId" INTEGER NULL,
+    "EquipmentId" INTEGER NULL,
+    "StandardId" INTEGER NULL,
+    "Notes" TEXT NULL,
+    "ParentItemId" INTEGER NULL,
+    "SortOrder" INTEGER NOT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL,
+    CONSTRAINT "FK_EstimateItems_Equipment_EquipmentId" FOREIGN KEY ("EquipmentId") REFERENCES "Equipment" ("Id"),
+    CONSTRAINT "FK_EstimateItems_EstimateItems_ParentItemId" FOREIGN KEY ("ParentItemId") REFERENCES "EstimateItems" ("Id"),
+    CONSTRAINT "FK_EstimateItems_Labor_LaborId" FOREIGN KEY ("LaborId") REFERENCES "Labor" ("Id"),
+    CONSTRAINT "FK_EstimateItems_Materials_MaterialId" FOREIGN KEY ("MaterialId") REFERENCES "Materials" ("Id"),
+    CONSTRAINT "FK_EstimateItems_Projects_ProjectId" FOREIGN KEY ("ProjectId") REFERENCES "Projects" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_EstimateItems_Standards_StandardId" FOREIGN KEY ("StandardId") REFERENCES "Standards" ("Id")
+);
+2025-08-18 10:56:10.937 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "StandardItems" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_StandardItems" PRIMARY KEY AUTOINCREMENT,
+    "StandardId" INTEGER NOT NULL,
+    "MaterialId" INTEGER NULL,
+    "LaborId" INTEGER NULL,
+    "EquipmentId" INTEGER NULL,
+    "Quantity" decimal(18,4) NOT NULL,
+    "UnitPrice" decimal(18,2) NULL,
+    "Notes" TEXT NULL,
+    "CreatedAt" TEXT NOT NULL,
+    "UpdatedAt" TEXT NULL,
+    "CreatedBy" TEXT NULL,
+    "UpdatedBy" TEXT NULL,
+    "IsDeleted" INTEGER NOT NULL,
+    "DeletedAt" TEXT NULL,
+    "DeletedBy" TEXT NULL,
+    CONSTRAINT "FK_StandardItems_Equipment_EquipmentId" FOREIGN KEY ("EquipmentId") REFERENCES "Equipment" ("Id"),
+    CONSTRAINT "FK_StandardItems_Labor_LaborId" FOREIGN KEY ("LaborId") REFERENCES "Labor" ("Id"),
+    CONSTRAINT "FK_StandardItems_Materials_MaterialId" FOREIGN KEY ("MaterialId") REFERENCES "Materials" ("Id"),
+    CONSTRAINT "FK_StandardItems_Standards_StandardId" FOREIGN KEY ("StandardId") REFERENCES "Standards" ("Id") ON DELETE CASCADE
+);
+2025-08-18 10:56:10.938 +00:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Categories" ("Id", "Code", "Color", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "Icon", "IsActive", "IsDeleted", "Name", "ParentCategoryId", "SortOrder", "Type", "UpdatedAt", "UpdatedBy")
+VALUES (1, 'MAT', NULL, '2025-08-18 10:56:10.7132335', NULL, NULL, NULL, NULL, NULL, 1, 0, 'Vật liệu xây dựng', NULL, 0, 'Material', NULL, NULL);
+SELECT changes();
+
+INSERT INTO "Categories" ("Id", "Code", "Color", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "Icon", "IsActive", "IsDeleted", "Name", "ParentCategoryId", "SortOrder", "Type", "UpdatedAt", "UpdatedBy")
+VALUES (2, 'LAB', NULL, '2025-08-18 10:56:10.7132338', NULL, NULL, NULL, NULL, NULL, 1, 0, 'Nhân công', NULL, 0, 'Labor', NULL, NULL);
+SELECT changes();
+
+INSERT INTO "Categories" ("Id", "Code", "Color", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "Icon", "IsActive", "IsDeleted", "Name", "ParentCategoryId", "SortOrder", "Type", "UpdatedAt", "UpdatedBy")
+VALUES (3, 'EQP', NULL, '2025-08-18 10:56:10.713234', NULL, NULL, NULL, NULL, NULL, 1, 0, 'Máy móc thiết bị', NULL, 0, 'Equipment', NULL, NULL);
+SELECT changes();
+
+INSERT INTO "Categories" ("Id", "Code", "Color", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "Icon", "IsActive", "IsDeleted", "Name", "ParentCategoryId", "SortOrder", "Type", "UpdatedAt", "UpdatedBy")
+VALUES (4, 'STD', NULL, '2025-08-18 10:56:10.7132342', NULL, NULL, NULL, NULL, NULL, 1, 0, 'Định mức xây dựng', NULL, 0, 'Standard', NULL, NULL);
+SELECT changes();
+2025-08-18 10:56:10.938 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Labor" ("Id", "Category", "Code", "CreatedAt", "CreatedBy", "DailyRate", "DeletedAt", "DeletedBy", "Description", "HourlyRate", "IsActive", "IsDeleted", "LastRateUpdate", "MonthlyRate", "Name", "Notes", "ProductivityFactor", "SafetyRequirements", "SkillRequirements", "UpdatedAt", "UpdatedBy")
+VALUES (1, 0, 'LAB001', '2025-08-18 10:56:10.7132565', NULL, '280000.0', NULL, NULL, NULL, '35000.0', 1, 0, NULL, '7000000.0', 'Công nhân xây dựng', NULL, '1.0', NULL, NULL, NULL, NULL);
+SELECT changes();
+
+INSERT INTO "Labor" ("Id", "Category", "Code", "CreatedAt", "CreatedBy", "DailyRate", "DeletedAt", "DeletedBy", "Description", "HourlyRate", "IsActive", "IsDeleted", "LastRateUpdate", "MonthlyRate", "Name", "Notes", "ProductivityFactor", "SafetyRequirements", "SkillRequirements", "UpdatedAt", "UpdatedBy")
+VALUES (2, 1, 'LAB002', '2025-08-18 10:56:10.713257', NULL, '400000.0', NULL, NULL, NULL, '50000.0', 1, 0, NULL, '10000000.0', 'Thợ hàn', NULL, '1.0', NULL, NULL, NULL, NULL);
+SELECT changes();
+
+INSERT INTO "Labor" ("Id", "Category", "Code", "CreatedAt", "CreatedBy", "DailyRate", "DeletedAt", "DeletedBy", "Description", "HourlyRate", "IsActive", "IsDeleted", "LastRateUpdate", "MonthlyRate", "Name", "Notes", "ProductivityFactor", "SafetyRequirements", "SkillRequirements", "UpdatedAt", "UpdatedBy")
+VALUES (3, 3, 'LAB003', '2025-08-18 10:56:10.7132574', NULL, '800000.0', NULL, NULL, NULL, '100000.0', 1, 0, NULL, '20000000.0', 'Kỹ sư giám sát', NULL, '1.0', NULL, NULL, NULL, NULL);
+SELECT changes();
+2025-08-18 10:56:10.939 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Materials" ("Id", "Brand", "Category", "Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "IsActive", "IsDeleted", "LastPriceUpdate", "Model", "Name", "Notes", "Specifications", "Supplier", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy", "Volume", "Weight")
+VALUES (1, 'Holcim', 0, 'CEM001', '2025-08-18 10:56:10.7132522', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 'Xi măng PCB40', NULL, NULL, 'Holcim Việt Nam', 5, '2500000.0', NULL, NULL, NULL, NULL);
+SELECT changes();
+
+INSERT INTO "Materials" ("Id", "Brand", "Category", "Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "IsActive", "IsDeleted", "LastPriceUpdate", "Model", "Name", "Notes", "Specifications", "Supplier", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy", "Volume", "Weight")
+VALUES (2, 'Hòa Phát', 1, 'STL001', '2025-08-18 10:56:10.7132525', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 'Thép CB300-V', NULL, NULL, 'Hòa Phát', 5, '18000000.0', NULL, NULL, NULL, NULL);
+SELECT changes();
+
+INSERT INTO "Materials" ("Id", "Brand", "Category", "Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "IsActive", "IsDeleted", "LastPriceUpdate", "Model", "Name", "Notes", "Specifications", "Supplier", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy", "Volume", "Weight")
+VALUES (3, NULL, 2, 'BRC001', '2025-08-18 10:56:10.7132528', NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 'Gạch ống 4 lỗ', NULL, NULL, NULL, 0, '1500.0', NULL, NULL, NULL, NULL);
+SELECT changes();
+2025-08-18 10:56:10.939 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Categories_ParentCategoryId" ON "Categories" ("ParentCategoryId");
+2025-08-18 10:56:10.940 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EstimateItems_EquipmentId" ON "EstimateItems" ("EquipmentId");
+2025-08-18 10:56:10.940 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EstimateItems_LaborId" ON "EstimateItems" ("LaborId");
+2025-08-18 10:56:10.940 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EstimateItems_MaterialId" ON "EstimateItems" ("MaterialId");
+2025-08-18 10:56:10.941 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EstimateItems_ParentItemId" ON "EstimateItems" ("ParentItemId");
+2025-08-18 10:56:10.941 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EstimateItems_ProjectId" ON "EstimateItems" ("ProjectId");
+2025-08-18 10:56:10.942 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EstimateItems_StandardId" ON "EstimateItems" ("StandardId");
+2025-08-18 10:56:10.942 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_PriceListItems_EquipmentId" ON "PriceListItems" ("EquipmentId");
+2025-08-18 10:56:10.942 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_PriceListItems_LaborId" ON "PriceListItems" ("LaborId");
+2025-08-18 10:56:10.943 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_PriceListItems_MaterialId" ON "PriceListItems" ("MaterialId");
+2025-08-18 10:56:10.943 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_PriceListItems_PriceListId" ON "PriceListItems" ("PriceListId");
+2025-08-18 10:56:10.944 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_StandardItems_EquipmentId" ON "StandardItems" ("EquipmentId");
+2025-08-18 10:56:10.944 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_StandardItems_LaborId" ON "StandardItems" ("LaborId");
+2025-08-18 10:56:10.944 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_StandardItems_MaterialId" ON "StandardItems" ("MaterialId");
+2025-08-18 10:56:10.945 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_StandardItems_StandardId" ON "StandardItems" ("StandardId");
+2025-08-18 10:56:11.044 +00:00 [FTL] Application failed to start
+System.NotSupportedException: Cannot show selection prompt since the current terminal isn't interactive.
+   at Spectre.Console.ListPrompt`1.Show(ListPromptTree`1 tree, CancellationToken cancellationToken, Int32 requestedPageSize, Boolean wrapAround) in /_/src/Spectre.Console/Prompts/List/ListPrompt.cs:line 28
+   at Spectre.Console.SelectionPrompt`1.ShowAsync(IAnsiConsole console, CancellationToken cancellationToken) in /_/src/Spectre.Console/Prompts/SelectionPrompt.cs:line 87
+   at Spectre.Console.SelectionPrompt`1.Show(IAnsiConsole console) in /_/src/Spectre.Console/Prompts/SelectionPrompt.cs:line 79
+   at Spectre.Console.AnsiConsole.Prompt[T](IPrompt`1 prompt) in /_/src/Spectre.Console/AnsiConsole.Prompt.cs:line 21
+   at ConstructionEstimator.Console.Services.ConsoleApplication.RunAsync() in /home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Console/Services/ConsoleApplication.cs:line 23
+   at ConstructionEstimator.Console.Program.Main(String[] args) in /home/runner/work/construction-estimator/construction-estimator/src/ConstructionEstimator.Console/Program.cs:line 63
+2025-08-18 11:00:09.648 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-18 11:00:09.690 +00:00 [INF] Hosting environment: Production
+2025-08-18 11:00:09.692 +00:00 [INF] Content root path: /home/runner/work/construction-estimator/construction-estimator
+2025-08-18 11:00:10.601 +00:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-08-18 11:00:10.908 +00:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "m"."Id", "m"."Brand", "m"."Category", "m"."Code", "m"."CreatedAt", "m"."CreatedBy", "m"."DeletedAt", "m"."DeletedBy", "m"."Description", "m"."IsActive", "m"."IsDeleted", "m"."LastPriceUpdate", "m"."Model", "m"."Name", "m"."Notes", "m"."Specifications", "m"."Supplier", "m"."UnitOfMeasure", "m"."UnitPrice", "m"."UpdatedAt", "m"."UpdatedBy", "m"."Volume", "m"."Weight"
+FROM "Materials" AS "m"
+WHERE NOT ("m"."IsDeleted")
+2025-08-18 11:00:11.332 +00:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 29), @p1='?' (Size = 20), @p2='?' (Size = 21), @p3='?' (Size = 10), @p4='?' (DbType = Decimal), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (Size = 3), @p8='?' (DbType = DateTime), @p9='?', @p10='?' (Size = 59), @p11='?' (DbType = DateTime), @p12='?' (DbType = Decimal), @p13='?' (DbType = Boolean), @p14='?' (DbType = Decimal), @p15='?' (Size = 15), @p16='?' (DbType = Decimal), @p17='?' (Size = 28), @p18='?', @p19='?' (DbType = Decimal), @p20='?' (DbType = Decimal), @p21='?' (DbType = Decimal), @p22='?' (DbType = DateTime), @p23='?' (DbType = Int32), @p24='?' (DbType = Decimal), @p25='?' (DbType = DateTime), @p26='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Projects" ("ClientAddress", "ClientEmail", "ClientName", "ClientPhone", "ContingencyPercentage", "CreatedAt", "CreatedBy", "Currency", "DeletedAt", "DeletedBy", "Description", "EndDate", "EquipmentCost", "IsDeleted", "LaborCost", "Location", "MaterialCost", "Name", "Notes", "OverheadCost", "ProfitAmount", "ProfitPercentage", "StartDate", "Status", "TotalCost", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26)
+RETURNING "Id";
+2025-08-18 11:00:11.349 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p27='?' (Size = 5), @p28='?' (DbType = DateTime), @p29='?', @p30='?' (DbType = DateTime), @p31='?', @p32='?' (Size = 50), @p33='?' (DbType = Int32), @p34='?' (DbType = Boolean), @p35='?' (DbType = Int32), @p36='?' (DbType = Int32), @p37='?' (Size = 18), @p38='?', @p39='?' (DbType = Int32), @p40='?' (DbType = Int32), @p41='?' (DbType = Decimal), @p42='?' (DbType = Int32), @p43='?' (DbType = Int32), @p44='?' (DbType = Decimal), @p45='?' (DbType = Int32), @p46='?' (DbType = Int32), @p47='?' (DbType = Decimal), @p48='?' (DbType = DateTime), @p49='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40, @p41, @p42, @p43, @p44, @p45, @p46, @p47, @p48, @p49)
+RETURNING "Id";
+2025-08-18 11:00:11.350 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 47), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 19), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:00:11.351 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 48), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 16), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:00:11.351 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 50), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 18), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:00:11.352 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 37), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 21), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:00:11.353 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 48), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:00:11.353 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 29), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 16), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:00:11.370 +00:00 [INF] Created new project: Nhà ở gia đình 2 tầng - Demo with ID: 1
+2025-08-18 11:00:11.392 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."ClientAddress", "p"."ClientEmail", "p"."ClientName", "p"."ClientPhone", "p"."ContingencyPercentage", "p"."CreatedAt", "p"."CreatedBy", "p"."Currency", "p"."DeletedAt", "p"."DeletedBy", "p"."Description", "p"."EndDate", "p"."EquipmentCost", "p"."IsDeleted", "p"."LaborCost", "p"."Location", "p"."MaterialCost", "p"."Name", "p"."Notes", "p"."OverheadCost", "p"."ProfitAmount", "p"."ProfitPercentage", "p"."StartDate", "p"."Status", "p"."TotalCost", "p"."UpdatedAt", "p"."UpdatedBy"
+FROM "Projects" AS "p"
+WHERE NOT ("p"."IsDeleted")
+2025-08-18 11:00:11.402 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."ClientAddress", "p"."ClientEmail", "p"."ClientName", "p"."ClientPhone", "p"."ContingencyPercentage", "p"."CreatedAt", "p"."CreatedBy", "p"."Currency", "p"."DeletedAt", "p"."DeletedBy", "p"."Description", "p"."EndDate", "p"."EquipmentCost", "p"."IsDeleted", "p"."LaborCost", "p"."Location", "p"."MaterialCost", "p"."Name", "p"."Notes", "p"."OverheadCost", "p"."ProfitAmount", "p"."ProfitPercentage", "p"."StartDate", "p"."Status", "p"."TotalCost", "p"."UpdatedAt", "p"."UpdatedBy"
+FROM "Projects" AS "p"
+WHERE NOT ("p"."IsDeleted")
+2025-08-18 11:00:11.411 +00:00 [INF] Application is shutting down...
+2025-08-18 11:05:18.307 +00:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-18 11:05:18.347 +00:00 [INF] Hosting environment: Production
+2025-08-18 11:05:18.348 +00:00 [INF] Content root path: /home/runner/work/construction-estimator/construction-estimator
+2025-08-18 11:05:19.263 +00:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2025-08-18 11:05:19.549 +00:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "m"."Id", "m"."Brand", "m"."Category", "m"."Code", "m"."CreatedAt", "m"."CreatedBy", "m"."DeletedAt", "m"."DeletedBy", "m"."Description", "m"."IsActive", "m"."IsDeleted", "m"."LastPriceUpdate", "m"."Model", "m"."Name", "m"."Notes", "m"."Specifications", "m"."Supplier", "m"."UnitOfMeasure", "m"."UnitPrice", "m"."UpdatedAt", "m"."UpdatedBy", "m"."Volume", "m"."Weight"
+FROM "Materials" AS "m"
+WHERE NOT ("m"."IsDeleted")
+2025-08-18 11:05:19.971 +00:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (Size = 29), @p1='?' (Size = 20), @p2='?' (Size = 21), @p3='?' (Size = 10), @p4='?' (DbType = Decimal), @p5='?' (DbType = DateTime), @p6='?', @p7='?' (Size = 3), @p8='?' (DbType = DateTime), @p9='?', @p10='?' (Size = 59), @p11='?' (DbType = DateTime), @p12='?' (DbType = Decimal), @p13='?' (DbType = Boolean), @p14='?' (DbType = Decimal), @p15='?' (Size = 15), @p16='?' (DbType = Decimal), @p17='?' (Size = 28), @p18='?', @p19='?' (DbType = Decimal), @p20='?' (DbType = Decimal), @p21='?' (DbType = Decimal), @p22='?' (DbType = DateTime), @p23='?' (DbType = Int32), @p24='?' (DbType = Decimal), @p25='?' (DbType = DateTime), @p26='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Projects" ("ClientAddress", "ClientEmail", "ClientName", "ClientPhone", "ContingencyPercentage", "CreatedAt", "CreatedBy", "Currency", "DeletedAt", "DeletedBy", "Description", "EndDate", "EquipmentCost", "IsDeleted", "LaborCost", "Location", "MaterialCost", "Name", "Notes", "OverheadCost", "ProfitAmount", "ProfitPercentage", "StartDate", "Status", "TotalCost", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26)
+RETURNING "Id";
+2025-08-18 11:05:19.989 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p27='?' (Size = 5), @p28='?' (DbType = DateTime), @p29='?', @p30='?' (DbType = DateTime), @p31='?', @p32='?' (Size = 50), @p33='?' (DbType = Int32), @p34='?' (DbType = Boolean), @p35='?' (DbType = Int32), @p36='?' (DbType = Int32), @p37='?' (Size = 18), @p38='?', @p39='?' (DbType = Int32), @p40='?' (DbType = Int32), @p41='?' (DbType = Decimal), @p42='?' (DbType = Int32), @p43='?' (DbType = Int32), @p44='?' (DbType = Decimal), @p45='?' (DbType = Int32), @p46='?' (DbType = Int32), @p47='?' (DbType = Decimal), @p48='?' (DbType = DateTime), @p49='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p27, @p28, @p29, @p30, @p31, @p32, @p33, @p34, @p35, @p36, @p37, @p38, @p39, @p40, @p41, @p42, @p43, @p44, @p45, @p46, @p47, @p48, @p49)
+RETURNING "Id";
+2025-08-18 11:05:19.990 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 47), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 19), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:05:19.991 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 48), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 16), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:05:19.991 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 50), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 18), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:05:19.992 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 37), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 21), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:05:19.992 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 48), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 12), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:05:19.992 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 5), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (Size = 29), @p6='?' (DbType = Int32), @p7='?' (DbType = Boolean), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32), @p10='?' (Size = 16), @p11='?', @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (DbType = Decimal), @p15='?' (DbType = Int32), @p16='?' (DbType = Int32), @p17='?' (DbType = Decimal), @p18='?' (DbType = Int32), @p19='?' (DbType = Int32), @p20='?' (DbType = Decimal), @p21='?' (DbType = DateTime), @p22='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EstimateItems" ("Code", "CreatedAt", "CreatedBy", "DeletedAt", "DeletedBy", "Description", "EquipmentId", "IsDeleted", "LaborId", "MaterialId", "Name", "Notes", "ParentItemId", "ProjectId", "Quantity", "SortOrder", "StandardId", "TotalPrice", "Type", "UnitOfMeasure", "UnitPrice", "UpdatedAt", "UpdatedBy")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22)
+RETURNING "Id";
+2025-08-18 11:05:20.011 +00:00 [INF] Created new project: Nhà ở gia đình 2 tầng - Demo with ID: 2
+2025-08-18 11:05:20.031 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."ClientAddress", "p"."ClientEmail", "p"."ClientName", "p"."ClientPhone", "p"."ContingencyPercentage", "p"."CreatedAt", "p"."CreatedBy", "p"."Currency", "p"."DeletedAt", "p"."DeletedBy", "p"."Description", "p"."EndDate", "p"."EquipmentCost", "p"."IsDeleted", "p"."LaborCost", "p"."Location", "p"."MaterialCost", "p"."Name", "p"."Notes", "p"."OverheadCost", "p"."ProfitAmount", "p"."ProfitPercentage", "p"."StartDate", "p"."Status", "p"."TotalCost", "p"."UpdatedAt", "p"."UpdatedBy"
+FROM "Projects" AS "p"
+WHERE NOT ("p"."IsDeleted")
+2025-08-18 11:05:20.041 +00:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."ClientAddress", "p"."ClientEmail", "p"."ClientName", "p"."ClientPhone", "p"."ContingencyPercentage", "p"."CreatedAt", "p"."CreatedBy", "p"."Currency", "p"."DeletedAt", "p"."DeletedBy", "p"."Description", "p"."EndDate", "p"."EquipmentCost", "p"."IsDeleted", "p"."LaborCost", "p"."Location", "p"."MaterialCost", "p"."Name", "p"."Notes", "p"."OverheadCost", "p"."ProfitAmount", "p"."ProfitPercentage", "p"."StartDate", "p"."Status", "p"."TotalCost", "p"."UpdatedAt", "p"."UpdatedBy"
+FROM "Projects" AS "p"
+WHERE NOT ("p"."IsDeleted")
+2025-08-18 11:05:20.048 +00:00 [INF] Application is shutting down...
