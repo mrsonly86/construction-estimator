@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{29F0ECE3-BC1A-4CAA-9C76-72A859E1A8BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructionEstimator.Core", "src\ConstructionEstimator.Core\ConstructionEstimator.Core.csproj", "{0DA6C0A4-5261-4B69-AD63-2156FDF5A5CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructionEstimator.Infrastructure", "src\ConstructionEstimator.Infrastructure\ConstructionEstimator.Infrastructure.csproj", "{5F70B6C5-1CA9-497F-A3B8-F0468844345D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructionEstimator.Shared", "src\ConstructionEstimator.Shared\ConstructionEstimator.Shared.csproj", "{A4510742-CF93-41B2-BD88-CC5F5488B49E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FD826CF4-FE7B-48A1-81EF-6CA6ADC94FBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructionEstimator.Tests", "tests\ConstructionEstimator.Tests\ConstructionEstimator.Tests.csproj", "{D6B3669E-3B4D-44D7-9EBC-5C7EF9D71F53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConstructionEstimator.WPF", "src\ConstructionEstimator.WPF\ConstructionEstimator.WPF.csproj", "{8BDFF049-DEB7-4C98-BC5A-F9085CF269EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0DA6C0A4-5261-4B69-AD63-2156FDF5A5CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA6C0A4-5261-4B69-AD63-2156FDF5A5CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA6C0A4-5261-4B69-AD63-2156FDF5A5CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA6C0A4-5261-4B69-AD63-2156FDF5A5CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F70B6C5-1CA9-497F-A3B8-F0468844345D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F70B6C5-1CA9-497F-A3B8-F0468844345D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F70B6C5-1CA9-497F-A3B8-F0468844345D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F70B6C5-1CA9-497F-A3B8-F0468844345D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4510742-CF93-41B2-BD88-CC5F5488B49E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4510742-CF93-41B2-BD88-CC5F5488B49E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4510742-CF93-41B2-BD88-CC5F5488B49E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4510742-CF93-41B2-BD88-CC5F5488B49E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B3669E-3B4D-44D7-9EBC-5C7EF9D71F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B3669E-3B4D-44D7-9EBC-5C7EF9D71F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B3669E-3B4D-44D7-9EBC-5C7EF9D71F53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B3669E-3B4D-44D7-9EBC-5C7EF9D71F53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BDFF049-DEB7-4C98-BC5A-F9085CF269EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BDFF049-DEB7-4C98-BC5A-F9085CF269EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BDFF049-DEB7-4C98-BC5A-F9085CF269EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BDFF049-DEB7-4C98-BC5A-F9085CF269EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0DA6C0A4-5261-4B69-AD63-2156FDF5A5CC} = {29F0ECE3-BC1A-4CAA-9C76-72A859E1A8BD}
+		{5F70B6C5-1CA9-497F-A3B8-F0468844345D} = {29F0ECE3-BC1A-4CAA-9C76-72A859E1A8BD}
+		{A4510742-CF93-41B2-BD88-CC5F5488B49E} = {29F0ECE3-BC1A-4CAA-9C76-72A859E1A8BD}
+		{D6B3669E-3B4D-44D7-9EBC-5C7EF9D71F53} = {FD826CF4-FE7B-48A1-81EF-6CA6ADC94FBF}
+		{8BDFF049-DEB7-4C98-BC5A-F9085CF269EB} = {29F0ECE3-BC1A-4CAA-9C76-72A859E1A8BD}
+	EndGlobalSection
+EndGlobal
