@@ -1,0 +1,221 @@
+<Window x:Class="ConstructionEstimator.WPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Phần mềm Dự toán Xây dựng - Construction Estimator" 
+        Height="800" Width="1200"
+        MinHeight="600" MinWidth="800"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <materialDesign:DialogHost Identifier="RootDialog">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Menu Bar -->
+            <Menu Grid.Row="0" IsMainMenu="True">
+                <MenuItem Header="_Tệp" SubmenuOpened="{Binding FileMenuOpenedCommand}">
+                    <MenuItem Header="_Dự án mới" Command="{Binding NewProjectCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FileDocumentPlus"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Mở dự án" Command="{Binding OpenProjectCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FolderOpen"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Lưu" Command="{Binding SaveProjectCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentSave"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Lưu _thành" Command="{Binding SaveAsProjectCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ContentSaveAs"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="Xuất _Excel" Command="{Binding ExportExcelCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FileExcel"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Xuất _PDF" Command="{Binding ExportPdfCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FilePdf"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator/>
+                    <MenuItem Header="T_hoát" Command="{Binding ExitCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="ExitToApp"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                
+                <MenuItem Header="_Chỉnh sửa">
+                    <MenuItem Header="_Hoàn tác" Command="{Binding UndoCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Undo"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Làm lại" Command="{Binding RedoCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Redo"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                
+                <MenuItem Header="_Dữ liệu">
+                    <MenuItem Header="_Vật liệu" Command="{Binding ManageMaterialsCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Package"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Định mức" Command="{Binding ManageStandardsCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Database"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Đơn giá" Command="{Binding ManagePricesCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="CurrencyUsd"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                
+                <MenuItem Header="_Báo cáo">
+                    <MenuItem Header="Dự toán _tổng hợp" Command="{Binding SummaryReportCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FileDocument"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Dự toán _chi tiết" Command="{Binding DetailedReportCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="FileDocumentEdit"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                
+                <MenuItem Header="_Trợ giúp">
+                    <MenuItem Header="_Hướng dẫn" Command="{Binding HelpCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Help"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="_Về phần mềm" Command="{Binding AboutCommand}">
+                        <MenuItem.Icon>
+                            <materialDesign:PackIcon Kind="Information"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+
+            <!-- Main Content -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" MinWidth="200"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Panel - Project Tree -->
+                <materialDesign:Card Grid.Column="0" Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0" Margin="10">
+                            <TextBlock Text="Cây dự án" Style="{StaticResource MaterialDesignHeadline6TextBlock}"/>
+                        </StackPanel>
+                        
+                        <TreeView Grid.Row="1" Margin="10" 
+                                  ItemsSource="{Binding ProjectTree}">
+                            <TreeView.ItemTemplate>
+                                <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="{Binding IconKind}" Margin="0,0,5,0"/>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </StackPanel>
+                                </HierarchicalDataTemplate>
+                            </TreeView.ItemTemplate>
+                        </TreeView>
+                    </Grid>
+                </materialDesign:Card>
+
+                <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="LightGray"/>
+
+                <!-- Main Work Area -->
+                <materialDesign:Card Grid.Column="2" Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Toolbar -->
+                        <ToolBarTray Grid.Row="0" Background="Transparent">
+                            <ToolBar Style="{DynamicResource MaterialDesignToolBar}">
+                                <Button Command="{Binding NewProjectCommand}" ToolTip="Dự án mới">
+                                    <materialDesign:PackIcon Kind="FileDocumentPlus"/>
+                                </Button>
+                                <Button Command="{Binding OpenProjectCommand}" ToolTip="Mở dự án">
+                                    <materialDesign:PackIcon Kind="FolderOpen"/>
+                                </Button>
+                                <Button Command="{Binding SaveProjectCommand}" ToolTip="Lưu">
+                                    <materialDesign:PackIcon Kind="ContentSave"/>
+                                </Button>
+                                <Separator/>
+                                <Button Command="{Binding UndoCommand}" ToolTip="Hoàn tác">
+                                    <materialDesign:PackIcon Kind="Undo"/>
+                                </Button>
+                                <Button Command="{Binding RedoCommand}" ToolTip="Làm lại">
+                                    <materialDesign:PackIcon Kind="Redo"/>
+                                </Button>
+                                <Separator/>
+                                <Button Command="{Binding ExportExcelCommand}" ToolTip="Xuất Excel">
+                                    <materialDesign:PackIcon Kind="FileExcel"/>
+                                </Button>
+                                <Button Command="{Binding ExportPdfCommand}" ToolTip="Xuất PDF">
+                                    <materialDesign:PackIcon Kind="FilePdf"/>
+                                </Button>
+                            </ToolBar>
+                        </ToolBarTray>
+                        
+                        <!-- Content Area -->
+                        <ContentControl Grid.Row="1" Content="{Binding CurrentView}" Margin="10"/>
+                    </Grid>
+                </materialDesign:Card>
+            </Grid>
+
+            <!-- Status Bar -->
+            <StatusBar Grid.Row="2">
+                <StatusBarItem>
+                    <TextBlock Text="{Binding StatusMessage}"/>
+                </StatusBarItem>
+                <StatusBarItem HorizontalAlignment="Right">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Dự án: "/>
+                        <TextBlock Text="{Binding CurrentProjectName}" FontWeight="Bold"/>
+                    </StackPanel>
+                </StatusBarItem>
+            </StatusBar>
+        </Grid>
+    </materialDesign:DialogHost>
+</Window>
