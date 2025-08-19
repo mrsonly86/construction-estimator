@@ -15,6 +15,14 @@ from datetime import datetime
 import json
 import os
 from pathlib import Path
+import threading
+
+# Import new modules
+from data_updater import DataUpdater, RegionalPriceManager
+from ai_engine import PricePredictionAI, MaterialOptimizer, MarketAnalysisAI
+from cloud_sync import CloudSyncManager
+from digital_signature import DigitalSignatureManager, TenderDocumentGenerator
+from report_generator import ReportGenerator
 
 class ConstructionEstimateApp:
     def __init__(self, root):
@@ -30,11 +38,17 @@ class ConstructionEstimateApp:
         # Tạo database
         self.init_database()
         
+        # Khởi tạo các module mới
+        self.init_advanced_modules()
+        
         # Tạo giao diện
         self.create_widgets()
         
         # Load dữ liệu mẫu
         self.load_sample_data()
+        
+        # Bắt đầu cập nhật tự động
+        self.start_background_services()
     
     def init_database(self):
         """Khởi tạo cơ sở dữ liệu"""
