@@ -1,0 +1,161 @@
+🏗️ HƯỚNG DẪN SỬ DỤNG PHẦN MỀM DỰ TOÁN XÂY DỰNG CHUYÊN NGHIỆP
+
+═══════════════════════════════════════════════════════════════════════
+
+📋 GIỚI THIỆU
+- Phần mềm dự toán xây dựng miễn phí, vượt trội hơn ETA, G8, F1
+- Giao diện hiện đại, thân thiện, dễ sử dụng
+- Tính toán nhanh chóng, chính xác
+- Hỗ trợ đầy đủ định mức xây dựng Việt Nam
+
+═══════════════════════════════════════════════════════════════════════
+
+🚀 CÁCH CÀI ĐẶT
+
+CÁCH 1: Chạy trực tiếp (cần Python)
+1. Cài đặt Python từ https://python.org
+2. Chạy file "install_dependencies.bat"
+3. Chạy file "main.py" hoặc file .exe được tạo
+
+CÁCH 2: Sử dụng file .exe (không cần Python)
+1. Chạy file "DuToanXayDung.exe" trong thư mục "dist"
+2. Tạo shortcut trên Desktop nếu cần
+
+═══════════════════════════════════════════════════════════════════════
+
+📖 CÁCH SỬ DỤNG
+
+🔹 TẠO DỰ ÁN MỚI:
+1. Mở phần mềm
+2. Chọn "Tệp" > "Dự án mới"
+3. Nhập thông tin dự án (tên, địa điểm, chủ đầu tư)
+
+🔹 THÊM HẠNG MỤC:
+1. Nhấn nút "➕ Thêm hạng mục"
+2. Chọn định mức từ danh sách có sẵn
+3. Nhập khối lượng và đơn giá
+4. Thêm ghi chú nếu cần
+5. Nhấn "Thêm"
+
+🔹 SỬA/XÓA HẠNG MỤC:
+- Sửa: Chọn hạng mục → nhấn "✏️ Sửa" hoặc double-click
+- Xóa: Chọn hạng mục → nhấn "🗑️ Xóa"
+
+🔹 TÍNH TOÁN:
+- Nhấn "📊 Tính toán" để tự động tính tổng chi phí
+- Hệ thống sẽ tính VAT 10% và tổng cuối cùng
+
+🔹 TÌM KIẾM:
+- Nhập từ khóa vào ô "Tìm kiếm"
+- Hệ thống sẽ highlight các hạng mục phù hợp
+
+═══════════════════════════════════════════════════════════════════════
+
+💾 QUẢN LÝ DỮ LIỆU
+
+🔹 LƯU DỰ ÁN:
+- Chọn "Tệp" > "Lưu dự án"
+- Chọn vị trí lưu file .json
+
+🔹 MỞ DỰ ÁN:
+- Chọn "Tệp" > "Mở dự án"
+- Chọn file .json đã lưu
+
+🔹 XUẤT BÁO CÁO:
+- Excel: "Tệp" > "Xuất Excel"
+- PDF: "Tệp" > "Xuất PDF"
+
+🔹 BACKUP DỮ LIỆU:
+- Chọn "Công cụ" > "Backup dữ liệu"
+- Chọn thư mục lưu backup
+
+═══════════════════════════════════════════════════════════════════════
+
+🛠️ QUẢN LÝ ĐỊNH MỨC
+
+🔹 XEM ĐỊNH MỨC:
+- Chọn "Công cụ" > "Quản lý định mức"
+- Xem danh sách định mức có sẵn
+
+🔹 THÊM ĐỊNH MỨC MỚI:
+1. Trong cửa sổ quản lý định mức
+2. Nhấn "➕ Thêm định mức"
+3. Nhập đầy đủ thông tin
+4. Nhấn "Thêm"
+
+🔹 SỬA/XÓA ĐỊNH MỨC:
+- Chọn định mức cần sửa/xóa
+- Nhấn nút tương ứng
+
+═══════════════════════════════════════════════════════════════════════
+
+🧮 CALCULATOR
+
+- Chọn "Công cụ" > "Calculator"
+- Sử dụng để tính toán nhanh các con số
+
+═══════════════════════════════════════════════════════════════════════
+
+⭐ TÍNH NĂNG VƯỢT TRỘI SO VỚI ETA, G8, F1
+
+✅ HOÀN TOÀN MIỄN PHÍ (ETA, G8, F1 đều có phí)
+✅ Giao diện hiện đại, thân thiện hơn
+✅ Tính toán nhanh chóng, chính xác
+✅ Backup tự động, bảo mật cao
+✅ Không giới hạn số dự án
+✅ Không cần kết nối internet
+✅ Hỗ trợ đầy đủ định mức Việt Nam
+✅ Xuất báo cáo đa dạng (Excel, PDF)
+✅ Tìm kiếm thông minh
+✅ Calculator tích hợp
+✅ Quản lý định mức linh hoạt
+
+═══════════════════════════════════════════════════════════════════════
+
+🔧 XỬ LÝ SỰ CỐ
+
+❓ Phần mềm không khởi động được?
+- Kiểm tra đã cài Python chưa
+- Chạy file "install_dependencies.bat"
+- Kiểm tra antivirus có chặn không
+
+❓ Không xuất được Excel/PDF?
+- Kiểm tra quyền ghi file
+- Đóng Excel nếu đang mở file cùng tên
+- Chọn đường dẫn khác
+
+❓ Mất dữ liệu?
+- Kiểm tra thư mục backup
+- File database: "construction_estimate.db"
+
+═══════════════════════════════════════════════════════════════════════
+
+📞 HỖ TRỢ
+
+📧 Email: support@dutoanxaydung.com
+🌐 Website: www.dutoanxaydung.com
+📱 Hotline: 1900-xxxx
+
+═══════════════════════════════════════════════════════════════════════
+
+📄 THÔNG TIN BẢN QUYỀN
+
+- Phần mềm: Dự toán Xây dựng Chuyên nghiệp v1.0
+- Phát triển: AI Assistant
+- Năm: 2024
+- Giấy phép: Miễn phí sử dụng
+- Bản quyền: Được phép sao chép và phân phối
+
+═══════════════════════════════════════════════════════════════════════
+
+🎯 CAM KẾT
+
+💝 MIỄN PHÍ VĨNH VIỄN - Không có phí ẩn
+🔒 BẢO MẬT TUYỆT ĐỐI - Dữ liệu chỉ lưu local
+⚡ CẬP NHẬT THƯỜNG XUYÊN - Thêm tính năng mới
+🎓 HỖ TRỢ TẬN TÌNH - Hướng dẫn chi tiết
+
+═══════════════════════════════════════════════════════════════════════
+
+Cảm ơn bạn đã sử dụng phần mềm Dự toán Xây dựng Chuyên nghiệp!
+Chúc bạn thành công trong công việc! 🚀
