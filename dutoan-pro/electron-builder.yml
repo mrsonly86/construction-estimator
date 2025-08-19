@@ -1,0 +1,21 @@
+appId: com.example.dutoanpro
+productName: DuToan Pro
+directories:
+  output: dist
+  buildResources: build
+files:
+  - build/**/*
+extraFiles:
+  - from: data
+    to: resources/data
+asar: true
+win:
+  target:
+    - nsis
+  artifactName: "${productName}-${version}-Setup.${ext}"
+nsis:
+  oneClick: true
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: false
+
